@@ -10,6 +10,7 @@
         <x-table>
             <x-slot:thead>
                 <th>Nombre</th>
+                <th>Usuario</th>
                 <th>Precio</th>
                 <th>Estado</th>
                 <th width="3%">...</th>
@@ -19,6 +20,7 @@
             @foreach ($cards as $card)
                 <tr>
                     <td>{{ $card->name }}</td>
+                    <td>{{ $card->user_id}}</td>
                     <td>{{ $card->price }}</td>
                     <td>{{ $card->status }}</td>
                     <td>
@@ -57,7 +59,7 @@
     </x-card>
 
     <x-modal modalId="modalCard" modalTitle="{{ $cardIdToEdit ? 'Editar Carta' : 'Crear Carta' }}">
-        <form wire:submit={{ $Id == 0 ? "store" : "update($Id)" }}>
+        <form wire:submit.prevent="{{ $cardIdToEdit ? 'update' : 'store' }}">
             <div class="form-row">
                 <div class="form-group col-12">
                     <label for="name">Nombre:</label>
