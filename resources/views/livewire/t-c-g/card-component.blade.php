@@ -51,7 +51,7 @@
                         <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
                     @enderror
                 </div>
-
+        
                 <div class="form-group col-12">
                     <label for="description">Descripción:</label>
                     <textarea wire:model="description" id="description" class="form-control" placeholder="Descripción de la carta"></textarea>
@@ -59,7 +59,7 @@
                         <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
                     @enderror
                 </div>
-
+        
                 <div class="form-group col-12">
                     <label for="price">Precio:</label>
                     <input wire:model="price" id="price" type="number" step="0.01" class="form-control" placeholder="Precio de la carta">
@@ -67,7 +67,7 @@
                         <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
                     @enderror
                 </div>
-
+        
                 <div class="form-group col-12">
                     <label for="image_url">URL de la imagen:</label>
                     <input wire:model="image_url" id="image_url" type="text" class="form-control" placeholder="URL de la imagen">
@@ -75,7 +75,7 @@
                         <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
                     @enderror
                 </div>
-
+        
                 <div class="form-group col-12">
                     <label for="status">Estado:</label>
                     <select wire:model="status" id="status" class="form-control">

@@ -9,6 +9,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Rutas protegidas por autenticación
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -17,6 +18,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/cards', CardComponent::class)->name('card'); // Mover dentro del grupo protegido
 });
 
 Auth::routes();
@@ -24,5 +27,3 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/inicio', Inicio::class)->name('inicio');
-
-Route::get('/cards', CardComponent::class)->name('card');
