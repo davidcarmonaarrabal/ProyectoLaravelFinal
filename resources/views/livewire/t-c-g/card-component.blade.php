@@ -9,10 +9,9 @@
 
         <x-table>
             <x-slot:thead>
-                <th>Nombre</th>
-                <th>Usuario</th>
-                <th>Precio</th>
-                <th>Estado</th>
+                <th>Nombre de la Carta</th>
+                <th>Usuario que oferta</th>
+                <th>Precio de la Carta</th>
                 <th width="3%">Comprar Carta</th>
                 <th width="3%">Ver Oferta</th>
                 <th width="3%">Editar Oferta</th>
@@ -21,9 +20,8 @@
             @foreach ($cards as $card)
                 <tr>
                     <td>{{ $card->name }}</td>
-                    <td>{{ $card->user_id}}</td>
+                    <td>{{ $card->user->name }}</td>
                     <td>{{ $card->price }}</td>
-                    <td>{{ $card->status }}</td>
                     <td>
                         @if($card->status === 'inactive' || $card->user_id === auth()->id())
                             <button title="No disponible por inactividad o ser tu propia venta" class="btn btn-secondary btn-xs" disabled>
@@ -37,7 +35,7 @@
                     </td>                 
                     <td>
                         @if($card->status === 'inactive')
-                            <button title="No disponible" class="btn btn-secondary btn-xs" disabled>
+                            <button title="No puedes ver una oferta inactiva" class="btn btn-secondary btn-xs" disabled>
                                 <i class="far fa-eye"></i>
                             </button>
                         @else
@@ -52,7 +50,7 @@
                                 <i class="far fa-edit"></i>
                             </button>
                         @else
-                            <button title="No tienes permiso para editar" class="btn btn-secondary btn-xs" disabled>
+                            <button title="No puedes editar una oferta que no es tuya" class="btn btn-secondary btn-xs" disabled>
                                 <i class="far fa-edit"></i>
                             </button>
                         @endif
@@ -63,7 +61,7 @@
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         @else
-                            <button title="No tienes permiso para eliminar" class="btn btn-secondary btn-xs" disabled>
+                            <button title="No puedes eliminar una oferta que no es tuya o que está inactiva" class="btn btn-secondary btn-xs" disabled>
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         @endif
