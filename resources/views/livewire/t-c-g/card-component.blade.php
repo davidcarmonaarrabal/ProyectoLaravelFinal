@@ -13,9 +13,10 @@
                 <th>Usuario</th>
                 <th>Precio</th>
                 <th>Estado</th>
-                <th width="3%">...</th>
-                <th width="3%">...</th>
-                <th width="3%">...</th>
+                <th width="3%">Comprar Carta</th>
+                <th width="3%">Ver Oferta</th>
+                <th width="3%">Editar Oferta</th>
+                <th width="3%">Borrar Oferta</th>
             </x-slot>
             @foreach ($cards as $card)
                 <tr>
@@ -24,10 +25,27 @@
                     <td>{{ $card->price }}</td>
                     <td>{{ $card->status }}</td>
                     <td>
-                        <a href="#" title="ver" class="btn btn-success btn-xs">
-                            <i class="far fa-eye"></i>
-                        </a>
-                    </td>
+                        @if($card->status === 'inactive' || $card->user_id === auth()->id())
+                            <button title="No disponible por inactividad o ser tu propia venta" class="btn btn-secondary btn-xs" disabled>
+                                <i class="nav-icon fas fa-store"></i>
+                            </button>
+                        @else
+                            <a href="#" title="Comprar" class="btn btn-success btn-xs">
+                                <i class="nav-icon fas fa-store"></i>
+                            </a>
+                        @endif
+                    </td>                 
+                    <td>
+                        @if($card->status === 'inactive')
+                            <button title="No disponible" class="btn btn-secondary btn-xs" disabled>
+                                <i class="far fa-eye"></i>
+                            </button>
+                        @else
+                            <a href="#" title="Ver" class="btn btn-success btn-xs">
+                                <i class="far fa-eye"></i>
+                            </a>
+                        @endif
+                    </td>                   
                     <td>
                         @if($card->user_id === auth()->id())
                             <button wire:click="edit({{ $card->id }})" title="Editar" class="btn btn-primary btn-xs">
@@ -38,9 +56,9 @@
                                 <i class="far fa-edit"></i>
                             </button>
                         @endif
-                    </td>  
+                    </td>                     
                     <td>
-                        @if($card->user_id === auth()->id())
+                        @if($card->user_id === auth()->id() && $card->status !== 'inactive')
                             <button wire:click="delete({{ $card->id }})" title="Eliminar" class="btn btn-danger btn-xs">
                                 <i class="far fa-trash-alt"></i>
                             </button>
@@ -49,7 +67,7 @@
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         @endif
-                    </td>                    
+                    </td>                                 
                 </tr>
             @endforeach
         </x-table>
