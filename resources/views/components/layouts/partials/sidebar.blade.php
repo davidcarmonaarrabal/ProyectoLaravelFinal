@@ -34,23 +34,24 @@
                     </a>
                 </li>
 
-                {{-- <li class="nav-item">
-                    <a href="{{ route('categories') }}" class="nav-link">
+                <li class="nav-item">
+                    <a href="{{ route('card') }}" class="nav-link">
                         <i class="nav-icon fas fa-store"></i>
                         <p>
-                            Categorias
+                            Cartas a comprar
                         </p>
                     </a>
                 </li>
-
+                
+                {{--
                 <li class="nav-item">
-                  <a href="{{ route('products') }}" class="nav-link">
-                      <i class="nav-icon fas fa-tshirt"></i>
-                      <p>
-                          Productos
-                      </p>
-                  </a>
-              </li> --}}
+                    <a href="{{ route('products') }}" class="nav-link">
+                        <i class="nav-icon fas fa-tshirt"></i>
+                        <p>
+                            Productos
+                        </p>
+                    </a>
+                </li> --}}
 
             </ul>
         </nav>
