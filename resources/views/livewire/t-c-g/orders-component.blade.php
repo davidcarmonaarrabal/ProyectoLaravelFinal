@@ -1,4 +1,22 @@
 <div>
+    @if (session()->has('message'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    @if (session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     {{-- Llamamos al componente de mi card --}}
     <x-card cardTitle="Listado de Órdenes ({{ $totalRegistros }})" cardFooter="Card Footer">
         <x-slot:cardTools>
@@ -20,14 +38,14 @@
                 <tr>
                     <td>{{ $order->id }}</td>
                     <td>
-                        <span class="badge badge-{{ $order->status === 'completed' ? 'success' : 'warning' }}">
-                            {{ $order->status }}
+                        <span class="badge badge-{{ $order->status === 'completed' ? 'success' : ($order->status === 'pending' ? 'warning' : 'danger') }}">
+                            {{ ucfirst($order->status) }}
                         </span>
                     </td>
                     <td>{{ $order->created_at->format('d/m/Y H:i') }}</td>
                     <td>${{ number_format($order->total, 2) }}</td>
                     <td>
-                        <a href="{{ route('order', $order->id) }}" title="Ver Detalles" class="btn btn-success btn-xs">
+                        <a href="{{ route('order.show', $order->id) }}" title="Ver Detalles" class="btn btn-success btn-xs">
                             <i class="far fa-eye"></i>
                         </a>
                     </td>

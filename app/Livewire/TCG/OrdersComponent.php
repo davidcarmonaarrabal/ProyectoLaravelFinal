@@ -36,4 +36,22 @@ class OrdersComponent extends Component
             'orders' => $orders,
         ]);
     }
+
+    public function cancelOrder($orderId)
+{
+    // Obtén la orden por su ID
+    $order = Order::find($orderId);
+
+    // Verifica que la orden exista y esté en estado "pending"
+    if ($order && $order->status === 'pending') {
+        // Cambia el estado de la orden a "canceled"
+        $order->update(['status' => 'cancelled']);
+
+        // Muestra un mensaje de éxito
+        session()->flash('message', 'Orden cancelada correctamente.');
+    } else {
+        // Muestra un mensaje de error si la orden no se puede cancelar
+        session()->flash('error', 'No puedes cancelar esta orden.');
+    }
+}
 }

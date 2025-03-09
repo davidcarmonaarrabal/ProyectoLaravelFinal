@@ -218,8 +218,8 @@ class CardComponent extends Component
         // Crea la orden
         Order::create([
             'user_id' => $userId,
-            'total_amount' => $card->price, // Usamos el precio de la carta como monto total
-            'status' => 'completed', // Marcamos la orden como completada
+            'total_amount' => $card->price, 
+            'status' => 'pending', 
         ]);
 
         // Cambia el estado de la carta a "inactiva"
