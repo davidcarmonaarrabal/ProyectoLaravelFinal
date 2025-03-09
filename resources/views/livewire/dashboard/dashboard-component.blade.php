@@ -32,5 +32,38 @@
                 </div>
             </div>
         </div>
+
+        <!-- Órdenes Pagadas -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Órdenes Pagadas</div>
+                <div class="card-body">
+                    <h3>{{ $paidOrdersCount }}</h3>
+                    <p>Este es el número de órdenes que has pagado.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Órdenes Canceladas -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Órdenes Canceladas</div>
+                <div class="card-body">
+                    <h3>{{ $cancelledOrdersCount }}</h3>
+                    <p>Este es el número de órdenes que has cancelado.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Órdenes Pendientes -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Órdenes Pendientes</div>
+                <div class="card-body">
+                    <h3>{{ $pendingOrdersCount }}</h3>
+                    <p>Este es el número de órdenes que están pendientes.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

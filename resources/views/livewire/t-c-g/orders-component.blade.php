@@ -18,11 +18,8 @@
     @endif
 
     {{-- Llamamos al componente de mi card --}}
-    <x-card cardTitle="Listado de Compras ({{ $totalRegistros }})" cardFooter="Card Footer">
-        <x-slot:cardTools>
-            <a href="#" class="btn btn-primary" wire:click="openCreateModal">
-                Crear Orden
-            </a>            
+    <x-card cardTitle="Listado de Compras ({{ $totalRegistros }}) (Para pagar en Transacciones)" cardFooter="Card Footer">
+        <x-slot:cardTools>        
         </x-slot:cardTools>
 
         <x-table>

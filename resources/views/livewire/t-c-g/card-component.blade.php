@@ -108,7 +108,7 @@
     
                 <div class="form-group col-12">
                     <label for="image_url">URL de la imagen:</label>
-                    <input wire:model="image_url" id="image_url" type="text" class="form-control" placeholder="URL de la imagen">
+                    <input wire:model="image_url" id="image_url" type="text" class="form-control" placeholder="URL de la imagen (Puedes no poner una)">
                     @error('image_url')
                         <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
                     @enderror
