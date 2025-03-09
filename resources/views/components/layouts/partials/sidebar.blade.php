@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('inicio') }}" class="brand-link">
-        <img src="{{ asset('dist/img/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('dist/img/logo.png') }}" alt="Logo" class="brand-image img-circle elevation-3"
             >
         <span class="brand-text font-weight-light">TCGL MARKET</span>
     </a>
@@ -15,7 +15,7 @@
             </div>
             <div class="info">
                 @if(Auth::check())  <!-- Verifica si el usuario está autenticado -->
-                    <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                    <a href="{{ route('profile', Auth::id()) }}" class="d-block">{{ Auth::user()->name }}</a>
                 @else
                     <a href="#" class="d-block">Invitado</a>
                 @endif
@@ -46,15 +46,15 @@
                     </a>
                 </li>
                 
-                {{--
+                
                 <li class="nav-item">
-                    <a href="{{ route('products') }}" class="nav-link">
-                        <i class="nav-icon fas fa-tshirt"></i>
+                    <a href="{{ route('order') }}" class="nav-link">
+                        <i class="nav-icon fas fa-money-bill"></i>
                         <p>
-                            Productos
+                            Mis compras
                         </p>
                     </a>
-                </li> --}}
+                </li>
 
             </ul>
         </nav>

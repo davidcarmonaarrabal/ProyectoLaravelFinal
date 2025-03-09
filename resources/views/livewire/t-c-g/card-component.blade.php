@@ -33,11 +33,11 @@
                                 <i class="nav-icon fas fa-store"></i>
                             </button>
                         @else
-                            <a href="#" title="Comprar" class="btn btn-success btn-xs">
+                            <button wire:click="buyCard({{ $card->id }})" title="Comprar" class="btn btn-success btn-xs">
                                 <i class="nav-icon fas fa-store"></i>
-                            </a>
+                            </button>
                         @endif
-                    </td>                 
+                    </td>          
                     <td>
                         @if($card->status === 'inactive')
                             <button title="No puedes ver una oferta inactiva" class="btn btn-secondary btn-xs" disabled>

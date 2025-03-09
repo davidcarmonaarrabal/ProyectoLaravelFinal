@@ -4,6 +4,7 @@ use App\Livewire\Dashboard\DashboardComponent;
 use App\Livewire\Home\Inicio;
 use App\Livewire\TCG\CardComponent;
 use App\Livewire\TCG\CardShow;
+use App\Livewire\TCG\OrdersComponent;
 use App\Livewire\User\ProfileComponent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,19 +19,20 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/dashboardd', function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/dashboard/component', DashboardComponent::class)->name('inicio');
+    Route::get('/dashboard', DashboardComponent::class)->name('inicio');
     Route::get('/cards', CardComponent::class)->name('card');
     Route::get('/cards/{card}', CardShow::class)->name('card.show');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/profile/{userId}', ProfileComponent::class)->name('profile');
+    Route::get('/orders', OrdersComponent::class)->name('order');
 });
 
 Auth::routes();
 
-Route::get('/dashboard', function () {
+Route::get('/dashboardd', function () {
     return redirect()->route('inicio');
 })->name('dashboard');

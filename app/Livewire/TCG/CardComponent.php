@@ -3,6 +3,7 @@
 namespace App\Livewire\TCG;
 
 use App\Models\Card;
+use App\Models\Order;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -174,12 +175,13 @@ class CardComponent extends Component
     }
 
     #[On('destroyCard')]
-    public function destroy($id){
-            $card = Card::findOrfail($id);
-            
-            $card->delete();
+    public function destroy($id)
+    {
+        $card = Card::findOrfail($id);
 
-            $this->dispatch('msg', 'Categoría borrada correctamente.');
+        $card->delete();
+
+        $this->dispatch('msg', 'Categoría borrada correctamente.');
     }
 
     public function delete($id)
@@ -188,9 +190,42 @@ class CardComponent extends Component
 
         if ($card && $card->user_id === Auth::id()) {
             $card->delete();
-            $this->dispatch('msg', 'Carta eliminada correctamente.'); 
+            $this->dispatch('msg', 'Carta eliminada correctamente.');
         } else {
-            $this->dispatch('msg', 'Error: No tienes permiso para eliminar esta carta.', 'error'); 
+            $this->dispatch('msg', 'Error: No tienes permiso para eliminar esta carta.', 'error');
         }
+    }
+
+    public function buyCard($cardId)
+    {
+        // Obtén la carta
+        $card = Card::find($cardId);
+
+        if (!$card) {
+            $this->dispatch('msg', 'Error: Carta no encontrada.', 'error');
+            return;
+        }
+
+        // Verifica que la carta esté activa y no sea del usuario autenticado
+        if ($card->status === 'inactive' || $card->user_id === Auth::id()) {
+            $this->dispatch('msg', 'No puedes comprar esta carta.', 'error');
+            return;
+        }
+
+        // Obtén el ID del usuario autenticado
+        $userId = Auth::id();
+
+        // Crea la orden
+        Order::create([
+            'user_id' => $userId,
+            'total_amount' => $card->price, // Usamos el precio de la carta como monto total
+            'status' => 'completed', // Marcamos la orden como completada
+        ]);
+
+        // Cambia el estado de la carta a "inactiva"
+        $card->update(['status' => 'inactive']);
+
+        // Muestra un mensaje de éxito
+        $this->dispatch('msg', 'Carta comprada correctamente.');
     }
 }
