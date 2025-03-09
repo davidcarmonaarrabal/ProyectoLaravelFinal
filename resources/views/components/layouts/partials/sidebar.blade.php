@@ -36,7 +36,7 @@
                     <a href="{{ route('card') }}" class="nav-link">
                         <i class="nav-icon fas fa-store"></i>
                         <p>
-                            Cartas a comprar
+                            Ofertas de Cartas
                         </p>
                     </a>
                 </li>

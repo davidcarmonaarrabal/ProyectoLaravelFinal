@@ -39,11 +39,11 @@
                                 <i class="far fa-eye"></i>
                             </button>
                         @else
-                            <a href="#" title="Ver" class="btn btn-success btn-xs">
+                            <a href="{{ route('card.show', $card->id) }}" title="Ver" class="btn btn-success btn-xs">
                                 <i class="far fa-eye"></i>
                             </a>
                         @endif
-                    </td>                   
+                    </td>                                  
                     <td>
                         @if($card->user_id === auth()->id())
                             <button wire:click="edit({{ $card->id }})" title="Editar" class="btn btn-primary btn-xs">

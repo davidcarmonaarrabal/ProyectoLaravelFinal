@@ -16,12 +16,12 @@ class CardFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word, // Nombre aleatorio
-            'description' => $this->faker->sentence, // Descripción aleatoria
-            'price' => $this->faker->randomFloat(2, 1, 100), // Precio entre 1 y 100
-            'image_url' => $this->faker->imageUrl(), // URL de imagen aleatoria
-            'user_id' => User::factory(), // Crea un usuario automáticamente
-            'status' => $this->faker->randomElement(['active', 'inactive']), // Estado aleatorio
+            'name' => $this->faker->word, 
+            'description' => $this->faker->sentence, 
+            'price' => $this->faker->randomFloat(2, 1, 100), 
+            'image_url' => 'https://decartascoleccionables.com/wp-content/uploads/2021/01/dorso-carta-pokemon-scaled.jpg',
+            'user_id' => User::factory(),
+            'status' => $this->faker->randomElement(['active', 'inactive']), 
         ];
     }
 }
