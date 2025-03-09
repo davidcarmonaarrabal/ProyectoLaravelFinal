@@ -4,6 +4,7 @@ use App\Livewire\Dashboard\DashboardComponent;
 use App\Livewire\Home\Inicio;
 use App\Livewire\TCG\CardComponent;
 use App\Livewire\TCG\CardShow;
+use App\Livewire\User\ProfileComponent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ Route::middleware([
     Route::get('/cards', CardComponent::class)->name('card');
     Route::get('/cards/{card}', CardShow::class)->name('card.show');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/profile/{userId}', ProfileComponent::class)->name('profile');
 });
 
 Auth::routes();

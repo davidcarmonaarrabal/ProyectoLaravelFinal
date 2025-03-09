@@ -8,15 +8,20 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
+
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                <img src="{{ asset('dist/img/user.svg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                @if(Auth::check())  <!-- Verifica si el usuario está autenticado -->
+                    <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                @else
+                    <a href="#" class="d-block">Invitado</a>
+                @endif
             </div>
         </div>
+
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">

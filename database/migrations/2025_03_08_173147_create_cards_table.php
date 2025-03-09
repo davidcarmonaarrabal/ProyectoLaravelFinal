@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2); // Precio con 8 dígitos en total y 2 decimales
-            $table->string('image_url')->nullable(); // URL de la imagen de la carta
+            $table->string('image_url')->nullable()->default('https://decartascoleccionables.com/wp-content/uploads/2021/01/dorso-carta-pokemon-scaled.jpg');
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relación con el vendedor
             $table->enum('status', ['active', 'inactive'])->default('active'); // Estado de la carta
             $table->timestamps();

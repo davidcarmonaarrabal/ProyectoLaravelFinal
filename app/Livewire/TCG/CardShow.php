@@ -6,7 +6,7 @@ use App\Models\Card;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Detalles de la Carta')]
+#[Title('Detalles de la Oferta')]
 class CardShow extends Component
 {
     public $card;

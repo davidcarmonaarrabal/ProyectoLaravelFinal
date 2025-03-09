@@ -8,7 +8,7 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-4">
-                <img src="{{ $card->image_url ?? 'https://pokexperto.net/cartadex/reverso.png' }}" class="img-fluid rounded" alt="Carta de Pokémon">
+                <img src="{{ $card->image_url ?? 'https://decartascoleccionables.com/wp-content/uploads/2021/01/dorso-carta-pokemon-scaled.jpg' }}" class="img-fluid rounded" alt="Carta de Pokémon">
             </div>
             <div class="col-md-8">
                 <h2>{{ $card->name }}</h2>
