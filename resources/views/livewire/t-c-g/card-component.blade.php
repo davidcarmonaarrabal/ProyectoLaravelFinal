@@ -65,7 +65,7 @@
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         @endif
-                    </td>                                 
+                    </td>                      
                 </tr>
             @endforeach
         </x-table>

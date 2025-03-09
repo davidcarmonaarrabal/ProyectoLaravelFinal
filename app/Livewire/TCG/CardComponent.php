@@ -7,6 +7,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 
 #[Title('Cartas')]
 class CardComponent extends Component
@@ -24,7 +25,6 @@ class CardComponent extends Component
     public $cant = 10;
     public $Id;
 
-    // Propiedad para almacenar el ID de la carta que se está editando
     public $cardIdToEdit;
 
     public function render()
@@ -60,25 +60,24 @@ class CardComponent extends Component
         ];
 
         $messages = [
-            'name.required' => 'El nombre es requerido',
-            'name.min' => 'El nombre debe tener mínimo 5 caracteres',
-            'name.max' => 'El nombre no debe superar 255 caracteres',
-            'name.unique' => 'El nombre de la carta ya está en uso',
-            'price.required' => 'El precio es requerido',
-            'price.numeric' => 'El precio debe ser un número',
-            'price.min' => 'El precio no puede ser negativo',
-            'image_url.url' => 'La URL de la imagen no es válida',
-            'status.required' => 'El estado es requerido',
-            'status.in' => 'El estado debe ser "active" o "inactive"',
+            'name.required' => 'El nombre es requerido.',
+            'name.min' => 'El nombre debe tener mínimo 5 caracteres.',
+            'name.max' => 'El nombre no debe superar 255 caracteres.',
+            'name.unique' => 'El nombre de la carta ya está en uso.',
+            'price.required' => 'El precio es requerido.',
+            'price.numeric' => 'El precio debe ser un número.',
+            'price.min' => 'El precio no puede ser negativo.',
+            'image_url.url' => 'La URL de la imagen no es válida.',
+            'status.required' => 'El estado es requerido.',
+            'status.in' => 'El estado debe ser "active" o "inactive".',
         ];
 
         $this->validate($rules, $messages);
 
-        // Asignar el ID del usuario autenticado
         $userId = Auth::id();
 
         if (!$userId) {
-            $this->dispatch('msg', 'Error: No se ha encontrado un usuario autenticado', 'error');
+            $this->dispatch('msg', 'Error: No se ha encontrado un usuario autenticado.', 'error');
             return;
         }
 
@@ -105,7 +104,7 @@ class CardComponent extends Component
         $card = Card::find($cardId);
         if ($card) {
             if ($card->user_id !== Auth::id()) {
-                $this->dispatch('msg', 'No tienes permiso para editar esta carta', 'error');
+                $this->dispatch('msg', 'No tienes permiso para editar esta carta.', 'error');
                 return;
             }
             $this->cardIdToEdit = $card->id;
@@ -118,12 +117,10 @@ class CardComponent extends Component
             // Emitir evento para abrir el modal
             $this->dispatch('open-modal', 'modalCard');
         } else {
-            $this->dispatch('msg', 'Error: Carta no encontrada', 'error');
+            $this->dispatch('msg', 'Error: Carta no encontrada.', 'error');
         }
     }
 
-
-    // Método para actualizar la carta
     public function update()
     {
         $rules = [
@@ -135,21 +132,20 @@ class CardComponent extends Component
         ];
 
         $messages = [
-            'name.required' => 'El nombre es requerido',
-            'name.min' => 'El nombre debe tener mínimo 5 caracteres',
-            'name.max' => 'El nombre no debe superar 255 caracteres',
-            'name.unique' => 'El nombre de la carta ya está en uso',
-            'price.required' => 'El precio es requerido',
-            'price.numeric' => 'El precio debe ser un número',
-            'price.min' => 'El precio no puede ser negativo',
-            'image_url.url' => 'La URL de la imagen no es válida',
-            'status.required' => 'El estado es requerido',
-            'status.in' => 'El estado debe ser "active" o "inactive"',
+            'name.required' => 'El nombre es requerido.',
+            'name.min' => 'El nombre debe tener mínimo 5 caracteres.',
+            'name.max' => 'El nombre no debe superar 255 caracteres.',
+            'name.unique' => 'El nombre de la carta ya está en uso.',
+            'price.required' => 'El precio es requerido.',
+            'price.numeric' => 'El precio debe ser un número.',
+            'price.min' => 'El precio no puede ser negativo.',
+            'image_url.url' => 'La URL de la imagen no es válida.',
+            'status.required' => 'El estado es requerido.',
+            'status.in' => 'El estado debe ser "active" o "inactive".',
         ];
 
         $this->validate($rules, $messages);
 
-        // Buscar la carta a actualizar
         $card = Card::find($this->cardIdToEdit);
 
         if ($card) {
@@ -162,12 +158,12 @@ class CardComponent extends Component
             ]);
 
             $this->dispatch('close-modal', 'modalCard');
-            $this->dispatch('msg', 'Carta actualizada correctamente');
+            $this->dispatch('msg', 'Carta actualizada correctamente.');
 
             // Resetear las propiedades
             $this->reset(['name', 'description', 'price', 'image_url', 'status', 'cardIdToEdit']);
         } else {
-            $this->dispatch('msg', 'Error: Carta no encontrada', 'error');
+            $this->dispatch('msg', 'Error: Carta no encontrada.', 'error');
         }
     }
 
@@ -175,5 +171,26 @@ class CardComponent extends Component
     {
         $this->reset(['name', 'description', 'price', 'image_url', 'status', 'cardIdToEdit']); // Asegurar que sea creación
         $this->dispatch('open-modal', 'modalCard');
+    }
+
+    #[On('destroyCard')]
+    public function destroy($id){
+            $card = Card::findOrfail($id);
+            
+            $card->delete();
+
+            $this->dispatch('msg', 'Categoría borrada correctamente.');
+    }
+
+    public function delete($id)
+    {
+        $card = Card::find($id);
+
+        if ($card && $card->user_id === Auth::id()) {
+            $card->delete();
+            $this->dispatch('msg', 'Carta eliminada correctamente.'); 
+        } else {
+            $this->dispatch('msg', 'Error: No tienes permiso para eliminar esta carta.', 'error'); 
+        }
     }
 }
