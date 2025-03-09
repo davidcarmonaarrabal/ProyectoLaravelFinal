@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('buyer_id')->constrained('users')->onDelete('cascade'); // Comprador
             $table->foreignId('card_id')->constrained()->onDelete('cascade'); // Carta comprada
+            $table->foreignId('order_id')->constrained()->onDelete('cascade'); // Orden asociada
             $table->decimal('amount', 8, 2); // Monto de la transacción
             $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending'); // Estado de la transacción
             $table->timestamps();

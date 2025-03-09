@@ -19,9 +19,8 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Relación con las transacciones (una orden puede tener muchas transacciones)
-    public function transactions()
+    public function transaction()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasOne(Transaction::class, 'order_id');
     }
 }

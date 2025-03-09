@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Card;
+use App\Models\Order;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,6 +20,7 @@ class TransactionFactory extends Factory
         return [
             'buyer_id' => User::factory(), // Crea un usuario automáticamente
             'card_id' => Card::factory(), // Crea una carta automáticamente
+            'order_id' => Order::factory(), // Crea una orden automáticamente
             'amount' => $this->faker->randomFloat(2, 1, 100), // Monto entre 1 y 100
             'status' => $this->faker->randomElement(['pending', 'completed', 'cancelled']), // Estado aleatorio
         ];

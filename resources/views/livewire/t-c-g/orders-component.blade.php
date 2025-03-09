@@ -18,7 +18,7 @@
     @endif
 
     {{-- Llamamos al componente de mi card --}}
-    <x-card cardTitle="Listado de Órdenes ({{ $totalRegistros }})" cardFooter="Card Footer">
+    <x-card cardTitle="Listado de Compras ({{ $totalRegistros }})" cardFooter="Card Footer">
         <x-slot:cardTools>
             <a href="#" class="btn btn-primary" wire:click="openCreateModal">
                 Crear Orden
@@ -27,7 +27,6 @@
 
         <x-table>
             <x-slot:thead>
-                <th>ID de la Orden</th>
                 <th>Estado</th>
                 <th>Fecha de Creación</th>
                 <th>Total</th>
@@ -36,14 +35,13 @@
             </x-slot>
             @foreach ($orders as $order)
                 <tr>
-                    <td>{{ $order->id }}</td>
                     <td>
                         <span class="badge badge-{{ $order->status === 'completed' ? 'success' : ($order->status === 'pending' ? 'warning' : 'danger') }}">
                             {{ ucfirst($order->status) }}
                         </span>
                     </td>
                     <td>{{ $order->created_at->format('d/m/Y H:i') }}</td>
-                    <td>${{ number_format($order->total, 2) }}</td>
+                    <td>${{ number_format($order->total_amount, 2) }}</td>
                     <td>
                         <a href="{{ route('order.show', $order->id) }}" title="Ver Detalles" class="btn btn-success btn-xs">
                             <i class="far fa-eye"></i>

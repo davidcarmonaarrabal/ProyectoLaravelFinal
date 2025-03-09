@@ -17,6 +17,7 @@
                 <p><strong>Fecha de Creación:</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>
                 <p><strong>Total:</strong> ${{ number_format($order->total_amount, 2) }}</p>
                 <p><strong>Comprador:</strong> {{ $order->user->name ?? 'Desconocido' }}</p>
+                <p><strong>Vendedor:</strong> {{ $order->card->user->name ?? 'Desconocido' }}</p>
 
                 <!-- Detalles de la Carta (si existe relación con Card) -->
                 @if($order->card)

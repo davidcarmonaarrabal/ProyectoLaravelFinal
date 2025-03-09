@@ -4,6 +4,7 @@ namespace App\Livewire\TCG;
 
 use App\Models\Card;
 use App\Models\Order;
+use App\Models\Transaction;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -216,10 +217,19 @@ class CardComponent extends Component
         $userId = Auth::id();
 
         // Crea la orden
-        Order::create([
+        $order = Order::create([
             'user_id' => $userId,
-            'total_amount' => $card->price, 
-            'status' => 'pending', 
+            'total_amount' => $card->price, // Monto total de la orden
+            'status' => 'pending', // Estado inicial de la orden
+        ]);
+
+        // Crea la transacción asociada a la orden
+        Transaction::create([
+            'buyer_id' => $userId, // ID del comprador
+            'card_id' => $card->id, // ID de la carta comprada
+            'order_id' => $order->id, // ID de la orden asociada
+            'amount' => $card->price, // Monto de la transacción
+            'status' => 'pending', // Estado inicial de la transacción
         ]);
 
         // Cambia el estado de la carta a "inactiva"

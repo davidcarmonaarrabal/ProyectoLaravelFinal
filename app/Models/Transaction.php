@@ -10,7 +10,7 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'buyer_id', 'card_id', 'amount', 'status',
+        'buyer_id', 'card_id', 'order_id', 'amount', 'status',
     ];
 
     // Relación con el comprador
@@ -23,5 +23,10 @@ class Transaction extends Model
     public function card()
     {
         return $this->belongsTo(Card::class);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
     }
 }
