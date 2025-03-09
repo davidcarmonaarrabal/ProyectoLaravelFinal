@@ -1,6 +1,6 @@
 <div>
     {{-- Llamamos al componente de mi card --}}
-    <x-card cardTitle="Perfil de Usuario" cardFooter="Card Footer">
+    <x-card cardTitle="Perfil de Usuario">
         <x-slot:cardTools>
             <a href="{{ route('dashboard') }}" class="btn btn-primary">
                 <i class="fas fa-arrow-circle-left"></i> Volver al Dashboard

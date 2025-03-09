@@ -20,7 +20,12 @@
             @foreach ($cards as $card)
                 <tr>
                     <td>{{ $card->name }}</td>
-                    <td>{{ $card->user->name }}</td>
+                    {{-- <td>{{ $card->user->name }}</td> --}}
+                    <td>
+                        <a class="badge badge-secondary" href="{{ route('profile', $card->user->id) }}">
+                            {{ $card->user->name }}
+                        </a>
+                    </td>
                     <td>{{ $card->price }}</td>
                     <td>
                         @if($card->status === 'inactive' || $card->user_id === auth()->id())

@@ -6,7 +6,9 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Livewire\Attributes\Title;
 
+#[Title('Perfil de usuario')]
 class ProfileComponent extends Component
 {
     public $user;
